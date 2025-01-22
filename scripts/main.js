@@ -1,16 +1,35 @@
-const myHeading = document.querySelector("h1");
-myHeading.textContent = "Hello world!";
+const myImage = document.querySelector("img");
 
-let myVariable = "Bob";
+myImage.addEventListener("click", () => {
+    const mySrc = myImage.getAttribute("src");
+    if (mySrc === "images/firefox-icon.png") {
+        myImage.setAttribute("src", "images/Graphic Design Is My Passion.png");
+    } else {
+        myImage.setAttribute("src", "images/firefox-icon.png");
+    }
+});
 
-/*
-Everything in between is a comment.
-*/
+let myButton = document.querySelector("button");
+let myHeading = document.querySelector("h1");
 
-// This is a comment
+function setUserName() {
+    const myName = prompt("Please enter your name.");
+    if (!myName) {
+        setUserName();
+    } else {
+        localStorage.setItem("name", myName);
+        myHeading.textContent = `Mozilla is cool, ${myName}`;
+    }
+}
 
 
-// the () for a function is an argument, or input
-// you also need a return part to get the output
+if (!localStorage.getItem("name")) {
+    setUserName();
+} else {
+    const storedName = localStorage.getItem("name");
+    myHeading.textContent = `Mozilla is cool, ${storedName}`;
+}
 
-//events https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website/Adding_interactivity?authuser=0
+myButton.addEventListener("click", () => {
+    setUserName();
+});
